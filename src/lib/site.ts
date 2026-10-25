@@ -1,6 +1,10 @@
 import { profile } from "./portfolio";
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+// NEXT_PUBLIC_SITE_URL wins if set; otherwise Vercel's production domain (it picks the custom domain when there is one).
+const vercelDomain = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? (vercelDomain ? `https://${vercelDomain}` : "http://localhost:3000")
+).replace(/\/$/, "");
 
 // Search-facing copy. Titles stay under ~60 characters and descriptions under ~160 so results aren't truncated.
 export const SITE_TITLE = `${profile.name} | MHA, Hospital Operations & Healthcare Management`;
