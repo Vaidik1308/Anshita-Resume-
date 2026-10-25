@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Fluent (Windows 11) tokens. Material You tokens (--md-*) are generated from
+   the seed colour in lib/palette.ts and injected by layout.tsx. */
+:root {
+  --win-bg: #e8efe9;
+  --win-text: #1b1b1b;
+  --win-text-2: #5d5d5d;
+  --win-accent: #0e7a6d;
+  --win-accent-fg: #ffffff;
+  --win-accent-soft: rgb(14 122 109 / 0.1);
+  --win-mica: rgb(244 247 245 / 0.78);
+  --win-layer: rgb(255 255 255 / 0.7);
+  --win-layer-2: rgb(255 255 255 / 0.5);
+  --win-stroke: rgb(0 0 0 / 0.08);
+  --win-hover: rgb(0 0 0 / 0.04);
+  --win-pressed: rgb(0 0 0 / 0.07);
+  --win-taskbar: rgb(238 245 241 / 0.78);
+  --win-flyout: rgb(248 248 248 / 0.88);
+  --win-shadow: 0 16px 48px rgb(0 0 0 / 0.22), 0 0 0 1px rgb(0 0 0 / 0.06);
+}
+
+.dark {
+  --win-bg: #0d1f22;
+  --win-text: #ffffff;
+  --win-text-2: #c5c5c5;
+  --win-accent: #5fd4c2;
+  --win-accent-fg: #00332c;
+  --win-accent-soft: rgb(95 212 194 / 0.12);
+  --win-mica: rgb(26 34 35 / 0.76);
+  --win-layer: rgb(255 255 255 / 0.05);
+  --win-layer-2: rgb(255 255 255 / 0.03);
+  --win-stroke: rgb(255 255 255 / 0.08);
+  --win-hover: rgb(255 255 255 / 0.06);
+  --win-pressed: rgb(255 255 255 / 0.04);
+  --win-taskbar: rgb(22 32 33 / 0.78);
+  --win-flyout: rgb(30 40 41 / 0.95);
+  --win-shadow: 0 16px 48px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.07);
+}
+
+@theme inline {
+  --font-win: "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", var(--font-inter), system-ui, sans-serif;
+  --font-md: var(--font-roboto), system-ui, sans-serif;
+  --font-sans: var(--font-win);
+
+  --color-win-bg: var(--win-bg);
+  --color-win-text: var(--win-text);
+  --color-win-text-2: var(--win-text-2);
+  --color-win-accent: var(--win-accent);
+  --color-win-accent-fg: var(--win-accent-fg);
+  --color-win-accent-soft: var(--win-accent-soft);
+  --color-win-mica: var(--win-mica);
+  --color-win-layer: var(--win-layer);
+  --color-win-layer-2: var(--win-layer-2);
+  --color-win-stroke: var(--win-stroke);
+  --color-win-hover: var(--win-hover);
+  --color-win-pressed: var(--win-pressed);
+  --color-win-taskbar: var(--win-taskbar);
+  --color-win-flyout: var(--win-flyout);
+
+  --color-md-primary: var(--md-primary);
+  --color-md-on-primary: var(--md-on-primary);
+  --color-md-primary-container: var(--md-primary-container);
+  --color-md-on-primary-container: var(--md-on-primary-container);
+  --color-md-secondary: var(--md-secondary);
+  --color-md-secondary-container: var(--md-secondary-container);
+  --color-md-on-secondary-container: var(--md-on-secondary-container);
+  --color-md-tertiary: var(--md-tertiary);
+  --color-md-tertiary-container: var(--md-tertiary-container);
+  --color-md-on-tertiary-container: var(--md-on-tertiary-container);
+  --color-md-background: var(--md-background);
+  --color-md-surface: var(--md-surface);
+  --color-md-on-surface: var(--md-on-surface);
+  --color-md-surface-variant: var(--md-surface-variant);
+  --color-md-on-surface-variant: var(--md-on-surface-variant);
+  --color-md-outline: var(--md-outline);
+  --color-md-outline-variant: var(--md-outline-variant);
+  --color-md-surface-container-low: var(--md-surface-container-low);
+  --color-md-surface-container: var(--md-surface-container);
+  --color-md-surface-container-high: var(--md-surface-container-high);
+  --color-md-surface-container-highest: var(--md-surface-container-highest);
+  --color-md-inverse-surface: var(--md-inverse-surface);
+  --color-md-inverse-on-surface: var(--md-inverse-on-surface);
+
+  --shadow-win: var(--win-shadow);
+  --animate-now-pulse: now-pulse 1.8s ease-out infinite;
+}
+
+@keyframes now-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(34 197 94 / 0.6); }
+  80%, 100% { box-shadow: 0 0 0 7px rgb(34 197 94 / 0); }
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  background: var(--win-bg);
+  color: var(--win-text);
+  font-family: var(--font-win);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--win-accent);
+  outline-offset: 2px;
+}
+
+.android :focus-visible {
+  outline-color: var(--md-primary);
+}
+
+/* Acrylic grain: a tiny inline SVG noise tile layered over translucent fills */
+.acrylic {
+  /* Only the standard property: Lightning CSS adds the -webkit- prefix and would
+     otherwise collapse the pair into the prefixed one, which Chrome ignores. */
+  backdrop-filter: blur(56px) saturate(170%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(128 128 128 / 0.4) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-now-pulse,
+  .animate-spin {
+    animation: none;
+  }
+}
